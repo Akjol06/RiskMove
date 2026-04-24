@@ -1,0 +1,11 @@
+feature,description,type
+credit_id,Unique ID for each credit application,int
+age,Age of the applicant,int
+monthly_income,Monthly income of the applicant,float
+employment_years,Number of years in current employment,float
+loan_amount,Requested loan amount,float
+loan_term_months,Loan term in months,int
+interest_rate,Interest rate for the loan,float
+past_due_30d,Number of times past due 30 days in last 2 years,int
+inquiries_6m,Number of credit inquiries in last 6 months,int
+target,"1 = Default (Bad), 0 = Non-Default (Good)",int
