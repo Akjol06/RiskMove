@@ -6,13 +6,10 @@ from app.interfaces.auth_api import router as auth_router
 from app.interfaces.user_api import router as user_router
 from app.interfaces.bureau_api import router as bureau_router
 from app.infrastructure.database import init_db
-import uvicorn
-
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
+from app.infrastructure.limiter import limiter
+from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-
-limiter = Limiter(key_func=get_remote_address)
+import uvicorn
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

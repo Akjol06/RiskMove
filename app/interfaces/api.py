@@ -11,7 +11,7 @@ from app.infrastructure.bureau_service import BureauService
 router = APIRouter()
 scoring_service = ScoringService()
 
-from app.main import limiter
+from app.infrastructure.limiter import limiter
 from fastapi import Request
 
 @router.post("/predict", response_model=ScoringResult)

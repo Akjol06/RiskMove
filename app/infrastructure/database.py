@@ -81,5 +81,29 @@ class BureauReportDB(Base):
 
 async def init_db():
     async with engine.begin() as conn:
-        # For production, use Alembic migrations. For hackaton, create_all is fine.
         await conn.run_sync(Base.metadata.create_all)
+    
+    # Seeding test users from fixtures
+    from app.infrastructure.fixtures.bureau_fixtures import BUREAU_FIXTURES
+    from app.infrastructure.security import encrypt_data
+    from app.application.auth_service import get_password_hash
+    from sqlalchemy import select
+
+    async with AsyncSessionLocal() as session:
+        for key, fix in BUREAU_FIXTURES.items():
+            # Check if user exists
+            username = f"user_{key.lower()}"
+            result = await session.execute(select(UserDB).filter(UserDB.username == username))
+            if not result.scalars().first():
+                new_user = UserDB(
+                    username=username,
+                    email=f"{key.lower()}@example.com",
+                    hashed_password=get_password_hash("password123"),
+                    first_name=fix["first_name"],
+                    last_name=fix["last_name"],
+                    encrypted_passport_id=encrypt_data(fix["passport_id"]),
+                    encrypted_pin=encrypt_data(fix["personal_number"]),
+                    phone_number="+996700112233"
+                )
+                session.add(new_user)
+        await session.commit()
