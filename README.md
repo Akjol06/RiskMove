@@ -43,8 +43,17 @@ uv run python scripts/train_model.py
 uv run uvicorn app.main:app --reload
 ```
 
-The API will be available at `http://localhost:8000`. 
-Explore the documentation at `http://localhost:8000/docs`.
+### 4. Frontend (React)
+The frontend is a React application located in the `front-risk-move` sibling directory.
+
+To run it:
+```bash
+cd ../front-risk-move
+npm install
+npm run dev
+```
+
+The UI provides a modern dashboard to input application details and visualize the ML scoring results.
 
 ## API Endpoints
 - `POST /api/v1/predict`: Submit a credit application and receive a decision with probability and explanation.

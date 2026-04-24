@@ -26,15 +26,22 @@
 ```json
 {
   "probability": 0.0548,
+  "base_value": 0.3062,
   "decision": "APPROVE",
   "explanation": [
-    { "feature": "interest_rate", "impact": -0.1505 },
-    { "feature": "loan_amount", "impact": -0.0408 },
-    { "feature": "monthly_income", "impact": -0.0366 },
-    { "feature": "loan_term_months", "impact": -0.0170 },
-    { "feature": "age", "impact": 0.0133 }
+    { 
+      "feature": "interest_rate", 
+      "impact": -0.1505,
+      "description": "снижает риск на 15.1%" 
+    },
+    { 
+      "feature": "loan_amount", 
+      "impact": -0.0408,
+      "description": "снижает риск на 4.1%" 
+    }
   ],
-  "message": "Заявка одобрена на основе низкого профиля риска."
+  "message": "Заявка одобрена на основе низкого профиля риска.",
+  "analysis_summary": "Основные факторы: Ставка снижает вероятность дефолта на 15.1%."
 }
 ```
 
